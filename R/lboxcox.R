@@ -22,7 +22,9 @@ lbc_train = function(formula, weight_column_name, data, init=NULL, svy_lambda_ve
     init = get_inits_from_model(model)
   }
   processed_data = get_processed_data(formula, data, weight_column_name)
-  maxLik(logLik=LogLikeFun, grad = ScoreFun, start=init, ixx=processed_data$ixx, iyy=processed_data$iyy, iw = processed_data$iw, iZZ = as.matrix(processed_data$iZZ) )
+   result<-maxLik(logLik=LogLikeFun, grad = ScoreFun, start=init, ixx=processed_data$ixx, iyy=processed_data$iyy, iw = processed_data$iw, iZZ = as.matrix(processed_data$iZZ) )
+   names(result)<-names(data)
+   result
 }
 
 #' @importFrom stats terms
